@@ -1,0 +1,28 @@
+{
+  "name": "Afro",
+  "frx": {
+    "type": "3d_anim",
+    "3d_anim": {
+      "type": "vfx"
+    }
+  },
+ 
+  "final" : {
+      "type" : "FILTER",
+
+      "filter" : {
+        "fragmentCode" : "finalColorFilter.fsh",
+        "textures" : [{
+          "file" : "limontea.png",
+          "sampler" : "lookupTexture",
+          "magFilter" : "LINEAR",
+          "minFilter" : "LINEAR"
+        }]
+      }
+
+    },
+   "sounds" : [
+                  { "trackName" : "afro.ogg" }
+                  ], 
+  "recordDuration" : 10
+}

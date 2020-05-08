@@ -1,0 +1,69 @@
+warp_mesh = "Morph.bsm2"
+
+draw_order = ['retouch', '!glfx_WARP_IMAGE', 'Default', 'hair', 'half', 'glass']
+
+# material from Morph.bsm2 - zpass after !glfx_WARP_IMAGE
+[materials."Default"]
+vs = "vertex.vert"
+fs = "nop.frag"
+blend = "off"
+backfaces = false
+colorwrite = false
+zwrite = true
+shadow = false
+onface = false
+samplers = {}
+
+[materials.retouch]
+vs = "retouch.vert"
+fs = "retouch.frag"
+blend = "alpha"
+backfaces = false
+colorwrite = true
+zwrite = true
+shadow = false
+onface = true
+mouth = true
+samplers = { selection_tex="redmask_new_3.png", lookupTexTeeth="teeth_highlighter5.png", lookupTexEyes="lut_80_percent.png", tex_makeup2="makeup2.png", tex_highlight="flare66.png"}
+
+[materials.glass]
+vs = "glass.vert"
+fs = "pbr_hdr.frag"
+blend = "premul_alpha" # "alpha", "premul_alpha", "screen", "add", "multiply", "coverage", "off"
+backfaces = false
+colorwrite = true
+zwrite = true
+shadow = true
+[materials.glass.samplers]
+tex_diffuse="afro_Base_Color.ktx"
+tex_normal="afro_Normal.ktx"
+tex_mrao="afro_MRAO.ktx"
+tex_brdf="brdf.ktx"
+tex_ibl_diff="ibl_diff.ktx"
+tex_ibl_spec="ibl_spec.ktx"
+
+[materials.hair]
+vs = "hair.vert"
+fs = "hair.frag"
+blend = "off" # "alpha", "premul_alpha", "screen", "add", "multiply", "coverage", "off"
+backfaces = true
+colorwrite = true
+zwrite = true
+shadow = true
+[materials.hair.samplers]
+tex_diffuse="afro_Base_Color.ktx"
+tex_normal="afro_Normal.ktx"
+tex_mrao="afro_MRAO.ktx"
+
+[materials.half]
+vs = "half.vert"
+fs = "half.frag"
+blend = "off" # "alpha", "premul_alpha", "screen", "add", "multiply", "coverage", "off"
+backfaces = true
+colorwrite = true
+zwrite = true
+shadow = true
+[materials.half.samplers]
+tex_diffuse="afro_Base_Color.ktx"
+tex_normal="afro_Normal.ktx"
+tex_mrao="afro_MRAO.ktx"
