@@ -72,7 +72,7 @@ extern "C" JNIEXPORT void JNICALL
 Java_com_banuba_sdk_example_quickstart_1cpp_BanubaSdk_loadEffect(JNIEnv* env, jobject thiz, jlong effect_player, jstring name)
 {
     auto sdk = (BanubaSdkManager*) effect_player;
-    sdk->effectPlayer->load_effect(jstring2string(env, name));
+    sdk->effectPlayer->effect_manager()->load(jstring2string(env, name));
 }
 
 extern "C" JNIEXPORT jbyteArray JNICALL
