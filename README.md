@@ -1,4 +1,4 @@
-Quick start examples for [Banuba SDK on Android](https://docs.banuba.com/docs/android/android_overview).
+Quick start examples for integrating [Banuba SDK on Android](https://docs.banuba.com/docs/android/android_overview) in C++ apps.
 
 # Getting Started
 
