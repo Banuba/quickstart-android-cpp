@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         ContextProvider.setContext(applicationContext)
 
         FileUtilsNN.setContext(applicationContext)
-        FileUtilsNN.setResourcesBasePath(resPath)
+        FileUtilsNN.setResourcesBasePath(resPath + "/android_nn")
 
         banubaSdk.initialize(resPath, BANUBA_CLIENT_TOKEN)
 
