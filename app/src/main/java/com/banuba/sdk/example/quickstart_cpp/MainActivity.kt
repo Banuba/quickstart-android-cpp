@@ -2,16 +2,14 @@ package com.banuba.sdk.example.quickstart_cpp
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.os.Bundle
-import android.os.ProxyFileDescriptorCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.banuba.sdk.example.common.BANUBA_CLIENT_TOKEN
 import com.banuba.sdk.utils.ContextProvider
 import com.banuba.utils.FileUtilsNN
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
+import java.io.*
 import java.nio.ByteBuffer
 import java.util.zip.ZipFile
 import javax.microedition.khronos.egl.EGLConfig
@@ -31,7 +29,8 @@ class MainActivity : AppCompatActivity() {
         val resPath = application.filesDir.absolutePath + "/bnb-resources"
         if (!File(resPath).exists()) {
             unzipResources(resPath)
-            copyEffects(resPath)
+            File(resPath).mkdirs()
+            copyAssets(File(resPath), "", listOf("effects"))
         }
 
         ContextProvider.setContext(applicationContext)
@@ -94,20 +93,48 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun copyEffects(resPath: String) {
-        val effects = "effects"
-        File(resPath, effects).mkdirs()
-        val effectsList = application.assets.list(effects)
-        for (e in effectsList) {
-            File(resPath, "$effects/$e").mkdirs()
-            val files = application.assets.list("$effects/$e")
-            for (f in files) {
-                val ofile = File(resPath, "$effects/$e/$f")
-                val ostream = ofile.outputStream()
-                val istream = application.assets.open("$effects/$e/$f")
-                istream.copyTo(ostream)
-                ostream.close()
-                istream.close()
+    @Throws(IOException::class)
+    fun copyAssets(
+        baseFolder: File?,
+        path: String,
+        assetsToCopy: List<String?>
+    ) {
+        val fileList = application.assets.list(path)
+        if (fileList?.isEmpty() == true) {
+            val file = File(baseFolder, path)
+            val parent = file.parentFile
+            if (!parent.exists() && !file.parentFile.mkdirs()) {
+                throw IOException(
+                    "Failed to create $parent. Check if you have `write` permissions"
+                )
+            }
+            application.assets.open(path).use { inputStream ->
+                FileOutputStream(file).use { outputStream ->
+                    processStreams(inputStream, outputStream)
+                }
+            }
+        } else {
+            for (children in fileList) {
+                if (assetsToCopy.contains(children)) {
+                    val fullPath = File(path, children).path
+                    copyAssets(
+                        baseFolder,
+                        fullPath,
+                        application.assets.list(fullPath).toList()
+                    )
+                }
+            }
+        }
+    }
+    @Throws(IOException::class)
+    private fun processStreams(inputStream: InputStream, outputStream: OutputStream) {
+        BufferedInputStream(inputStream).use { `in` ->
+            BufferedOutputStream(outputStream).use { out ->
+                val buffer = ByteArray(10240)
+                var bytesRead: Int
+                while (`in`.read(buffer).also { bytesRead = it } >= 0) {
+                    out.write(buffer, 0, bytesRead)
+                }
             }
         }
     }
@@ -139,13 +166,18 @@ class EPRenderer(sdk: BanubaSdk, callback: (Bitmap) -> Unit) : GLSurfaceView.Ren
         val bitmap = imageToProcess
         if (bitmap != null) {
 
-            banubaSdk.loadEffect(effectPlayer, "effects/Afro")
+            banubaSdk.loadEffect(effectPlayer, "effects/TrollGrandma")
 
             val size = bitmap.rowBytes * bitmap.height
             val byteBuffer = ByteBuffer.allocateDirect(size)
             bitmap.copyPixelsToBuffer(byteBuffer)
 
-            val result = banubaSdk.processPhoto(effectPlayer, byteBuffer, bitmap.width, bitmap.height)
+            val result = banubaSdk.processPhoto(
+                effectPlayer,
+                byteBuffer,
+                bitmap.width,
+                bitmap.height
+            )
             val image = Bitmap.createBitmap(bitmap.width, bitmap.height, Bitmap.Config.ARGB_8888)
             image.copyPixelsFromBuffer(ByteBuffer.wrap(result))
 
