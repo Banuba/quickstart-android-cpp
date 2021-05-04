@@ -168,6 +168,9 @@ class EPRenderer(sdk: BanubaSdk, callback: (Bitmap) -> Unit) : GLSurfaceView.Ren
 
             banubaSdk.loadEffect(effectPlayer, "effects/TrollGrandma")
 
+            // perform 1 draw call to prepare rendering pipeline
+            banubaSdk.processPhoto(effectPlayer, ByteBuffer.allocateDirect(4), 1, 1)
+
             val size = bitmap.rowBytes * bitmap.height
             val byteBuffer = ByteBuffer.allocateDirect(size)
             bitmap.copyPixelsToBuffer(byteBuffer)
