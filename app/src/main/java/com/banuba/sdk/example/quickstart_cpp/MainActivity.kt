@@ -76,6 +76,8 @@ class MainActivity : AppCompatActivity() {
         fout.close()
         asset.close()
 
+        File(unzipPath).mkdirs()
+
         // unzip
         ZipFile(zipFile).use { zip ->
             zip.entries().asSequence().forEach { entry ->
