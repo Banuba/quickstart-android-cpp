@@ -1,5 +1,5 @@
 
-#include <bnb/utils/interfaces/all.hpp>
+#include <bnb/recognizer/interfaces/all.hpp>
 #include <bnb/effect_player/interfaces/all.hpp>
 
 #include <jni.h>
