@@ -59,7 +59,7 @@ dependencies {
 task extractAAR(type: Copy) {
     println 'Extracting *.so file(s)....'
 
-    from zipTree("libs/banuba_effect_player-release.aar")
+    from zipTree("libs/banuba_effect_player_c_api-release.aar")
     into "libs/lib/"
     include "jni/**/*.so"
 

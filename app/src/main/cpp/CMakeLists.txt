@@ -10,6 +10,9 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+add_subdirectory(libraries)
+add_subdirectory(offscreen_render_target)
+
 add_library( # Sets the name of the library.
              native-lib
 
@@ -48,7 +51,7 @@ add_library(banuba INTERFACE)
 
 target_link_libraries(banuba
     INTERFACE
-    "${CMAKE_CURRENT_LIST_DIR}/../../../libs/lib/${ANDROID_ABI}/libbanuba.so"
+    "${CMAKE_CURRENT_LIST_DIR}/../../../libs/lib/${ANDROID_ABI}/libBNBEffectPlayerC.so"
 )
 
 target_include_directories(
@@ -59,4 +62,8 @@ target_include_directories(
 
 
 # Link with banuba sdk
-target_link_libraries(native-lib banuba)
+target_link_libraries(native-lib
+        banuba
+        offscreen_rt
+        utils
+        )

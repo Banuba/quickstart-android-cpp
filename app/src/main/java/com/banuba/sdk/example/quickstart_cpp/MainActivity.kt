@@ -122,6 +122,10 @@ class EPRenderer(sdk: BanubaSdk, callback: (Bitmap) -> Unit) : GLSurfaceView.Ren
     private val effectPlayer: Long = banubaSdk.createEffectPlayer()
     private var imageToProcess: Bitmap? = null
 
+    // Size of photo.jpg
+    private val width: Int = 1000
+    private val height: Int = 1500
+
     fun processImage(bitmap: Bitmap) {
         imageToProcess = bitmap
     }
@@ -131,8 +135,9 @@ class EPRenderer(sdk: BanubaSdk, callback: (Bitmap) -> Unit) : GLSurfaceView.Ren
     }
 
     override fun onSurfaceChanged(gl: GL10, w: Int, h: Int) {
-        banubaSdk.surfaceChanged(effectPlayer, w, h);
-        gl.glViewport(0, 0, w, h)
+
+        banubaSdk.surfaceChanged(effectPlayer, width, height);
+        gl.glViewport(0, 0, width, height)
     }
 
     override fun onDrawFrame(gl: GL10) {
