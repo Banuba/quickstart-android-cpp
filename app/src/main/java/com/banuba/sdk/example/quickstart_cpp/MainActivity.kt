@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        render.onDestroy()
         banubaSdk.deinitialize()
     }
 
@@ -188,5 +189,10 @@ class EPRenderer(sdk: BanubaSdk, callback: (Bitmap) -> Unit) : GLSurfaceView.Ren
 
             completion(image)
         }
+    }
+
+    fun onDestroy() {
+        banubaSdk.surfaceDestroyed(effectPlayer)
+        banubaSdk.destroyEffectPlayer(effectPlayer)
     }
 }
