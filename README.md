@@ -1,4 +1,4 @@
-Quick start examples for integrating [Banuba SDK on Android](https://docs.banuba.com/face-ar-sdk/android/android_overview) in C++ apps.
+Quick start examples for integrating [Banuba SDK on Android](https://docs.banuba.com/face-ar-sdk-v1/android/android_overview) in C++ apps.
 
 # Getting Started
 
