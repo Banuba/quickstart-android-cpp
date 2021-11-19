@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.banuba.sdk.example.common.BANUBA_CLIENT_TOKEN
 import com.banuba.sdk.utils.ContextProvider
-import com.banuba.utils.FileUtilsNN
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 import java.nio.ByteBuffer
@@ -34,9 +33,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         ContextProvider.setContext(applicationContext)
-
-        FileUtilsNN.setContext(applicationContext)
-        FileUtilsNN.setResourcesBasePath(resPath + "/android_nn")
 
         banubaSdk.initialize(resPath, BANUBA_CLIENT_TOKEN)
 
