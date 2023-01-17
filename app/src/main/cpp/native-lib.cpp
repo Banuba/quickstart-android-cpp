@@ -25,14 +25,12 @@ namespace
         std::shared_ptr<effect_player> effectPlayer;
 
         BanubaSdkManager()
-            : effectPlayer{effect_player::create({
-                720 /*fx_width*/,
-                1280 /*fx_height*/,
-                nn_mode::automatically /*nn_enable*/,
-                face_search_mode::good /*face_search*/,
-                false /*js_debugger_enable*/,
-                false /*manual_audio*/
-            })}
+            : effectPlayer{effect_player::create(
+                effect_player_configuration::create(
+                    720 /*fx_width*/,
+                    1280 /*fx_height*/
+                )
+            )}
         {
         }
     };
