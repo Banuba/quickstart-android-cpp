@@ -95,7 +95,7 @@ Java_com_banuba_sdk_example_quickstart_1cpp_BanubaSdk_processPhoto(JNIEnv* env, 
     const auto processed = sdk->effectPlayer->process_image(
         std::move(image),
         /* output_format */ pixel_format::rgba,
-        /* process_image_params */ {false, {}, {}});
+        /* process_image_params */ {{}});
 
     auto byte_array = env->NewByteArray(processed.size);
     env->SetByteArrayRegion(byte_array, 0, processed.size, reinterpret_cast<const jbyte*>(processed.data.get()));
