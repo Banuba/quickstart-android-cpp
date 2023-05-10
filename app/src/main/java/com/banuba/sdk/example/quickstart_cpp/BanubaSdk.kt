@@ -3,7 +3,7 @@ package com.banuba.sdk.example.quickstart_cpp
 import java.nio.ByteBuffer
 
 class BanubaSdk {
-    external fun initialize(pathToResources: String, clientToken: String)
+    external fun initialize(clientToken: String)
     external fun deinitialize()
 
     external fun createEffectPlayer(): Long

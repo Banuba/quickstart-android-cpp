@@ -37,13 +37,11 @@ namespace
 } // namespace
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_banuba_sdk_example_quickstart_1cpp_BanubaSdk_initialize(JNIEnv* env, jobject thiz, jstring path_to_resources, jstring client_token)
+Java_com_banuba_sdk_example_quickstart_1cpp_BanubaSdk_initialize(JNIEnv* env, jobject thiz, jstring client_token)
 {
-    std::vector<std::string> paths{jstring2string(env, path_to_resources)};
     auto token = jstring2string(env, client_token);
 
-
-    utility_manager::initialize(paths, token);
+    utility_manager::initialize({}, token);
 }
 
 extern "C" JNIEXPORT void JNICALL
