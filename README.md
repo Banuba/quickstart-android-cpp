@@ -6,6 +6,8 @@ Quick start examples for integrating [Banuba SDK on Android](https://docs.banuba
 2. Copy `aar` and `include` files from the Banuba SDK archive into `libs` dir:
     `BNBEffectPlayer/include` => `quickstart-android-cpp/app/libs/include`
     `BNBEffectPlayer/banuba_effect_player-release.aar` => `quickstart-android-cpp/app/libs/banuba_effect_player-release.aar`
+3. Copy content of `bnb-resources.tar.gz` into `assets/bnb-resources` folder:
+    Content of `bnb-resources.tar.gz` => `quickstart-android-cpp/app/assets/bnb-resources`
 3. Copy and Paste your client token into appropriate section of `com/banuba/sdk/example/common/BanubaClientToken.kt`
 4. Open the project in Android Studio and run the necessary target using the usual steps.
 
