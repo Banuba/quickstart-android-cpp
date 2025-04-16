@@ -1,3 +1,5 @@
+## This sample is deprecated. Please, rely on [Java/Kotlin interfaces](https://github.com/Banuba/banuba-sdk-android-samples)
+
 Quick start examples for integrating [Banuba SDK on Android](https://docs.banuba.com/face-ar-sdk-v1/android/android_overview) in C++ apps.
   
 # Getting Started
